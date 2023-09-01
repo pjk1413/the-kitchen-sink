@@ -2,6 +2,10 @@
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+## Deploy
+[Deployment Instructions](https://enterflash.io/posts/deploy-nuxt-3-to-firebase-hosting)
+
+
 ## Setup
 
 Make sure to install the dependencies:

@@ -1,9 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   runtimeConfig: {
-    // Public keys that are exposed to the client
     public: {
-      apiBase: process.env.API_BASE || 'http://localhost:8000/'
+      apiBase: process.env.NUXT_ENV_API_BASE_URL || 'http://localhost:8000/'
     }
   },
   ssr: true,
@@ -13,16 +12,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: false },
   css: [
-    // 'quasar/variables'
-    // 'quasar/fonts',
-    // 'quasar/animations',
-    // 'quasar/icons',
-    // 'quasar/css',
-    // 'quasar/brand'
     '~/assets/css/_typography.scss'
-  ],
-  link: [
-    { rel:"script", type:"script", href:'https://js.stripe.com/v3/buy-button.js' }
   ],
   vite: {
     css: {
