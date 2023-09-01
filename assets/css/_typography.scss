@@ -1,0 +1,45 @@
+// @import 'quasar/variables.sass';
+
+.text-heading {
+  font-family: $heading;
+}
+
+.text-subheading {
+  font-family: $subheading;
+}
+
+.text-paragraph {
+  font-family: $body;
+}
+
+
+@media (max-width: $breakpoint-sm-min) {
+    // size: 6rem,     line-height: 6rem,     letter-spacing: -.01562em, weight: 300
+    h1, .text-h1 {
+      font-size: 3rem;
+      line-height: 3rem;
+    }
+  
+    // size: 3.75rem,  line-height: 3.75rem,  letter-spacing: -.00833em, weight: 300
+    h2, .text-h2 {
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+  
+    // size: 3rem,     line-height: 3.125rem, letter-spacing: normal,    weight: 400
+    h3, .text-h3 {
+      font-size: 1.5rem;
+      line-height: 1.7rem;
+    }
+  
+    // size: 2.125rem, line-height: 2.5rem,   letter-spacing: .00735em,  weight: 400
+    // h4, .text-h4 {
+    //   font-size: 1.3rem;
+    //   line-height: 1.3rem;
+    // }
+  
+    .semi-circle {
+      width: 50px;
+    }
+  
+  }

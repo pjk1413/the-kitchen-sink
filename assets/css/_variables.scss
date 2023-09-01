@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Gilda+Display&family=Questrial&family=Spectral:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&family=Montserrat:wght@100;200;300;400;500&display=swap');
+
+@import '_global.scss';
+@import '_backgrounds.scss';
+
+// COLORS
+$primary: #f0cf90;
+$secondary: #ceb700;
+$accent: #4f0147;
+
+$dark: #4e3d42;
+$dark-page: #ffefd2;
+
+$positive: #519872;
+$negative: #ff2e00;
+$info: #83bcff;
+$warning: #fb6107;
+
+
+// FONTS
+$heading: 'Barlow Condensed', sans-serif;
+$subheading: 'Montserrat', sans-serif;
+$body: "Spectral", serif;
+
