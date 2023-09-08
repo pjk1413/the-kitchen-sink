@@ -3,6 +3,9 @@
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Deploy
+Start by build: ```sudo NITRO_PRESET=firebase npm run build```
+Then deploy: ```sudo firebase deploy```
+
 [Deployment Instructions](https://enterflash.io/posts/deploy-nuxt-3-to-firebase-hosting)
 
 
