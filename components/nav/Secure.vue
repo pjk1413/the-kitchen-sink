@@ -1,7 +1,7 @@
 <template>
       <!-- <div class="q-py-md font-paragraph"> -->
-  <q-toolbar class="q-mx-auto q-px-lg text-dark">
-    <q-btn class="text-weight-bold q-mt-sm font-heading" flat to="/secure">
+  <q-toolbar class="q-mx-auto q-px-lg text-dark text-body">
+    <q-btn class="q-mt-sm text-heading" flat to="/secure">
       KITCHEN SINK
     </q-btn>
     <q-space />
@@ -10,11 +10,11 @@
         notice shrink property since we are placing it
         as child of QToolbar
       -->
-    <q-btn-group flat v-if="$q.screen.gt.sm">
+    <q-btn-group flat v-if="$q.screen.gt.xs">
       <q-btn to="/secure/shoppinglist" icon="shopping_cart">SHOPPING LIST</q-btn>
       <q-btn to="/secure/account" icon="account_circle">ACCOUNT</q-btn>
     </q-btn-group>
-    <q-btn v-if="$q.platform.is.mobile" flat round dense icon="menu">
+    <q-btn v-if="!$q.screen.gt.xs" flat round dense icon="menu">
       <q-menu>
         <q-list style="min-width: 150px">
           <q-item clickable v-ripple to="/secure/shoppinglist">

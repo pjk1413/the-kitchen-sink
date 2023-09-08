@@ -1,5 +1,5 @@
 <template>
-  <div class="q-mx-auto" style="max-width: 400px;">
+  <div class="q-mx-auto text-body" style="max-width: 400px;">
 
     <div v-if="accountStore.user && !accountStore.user.active_subscription">
       <NotifcationSubscriptionStatus :expires="accountStore.user && accountStore.user.active_until" />
@@ -66,7 +66,7 @@
       </q-card-section>
     </q-card>
 
-    <q-dialog v-model="changePasswordDialog" persistent>
+    <q-dialog v-model="changePasswordDialog" persistent class="text-body">
       <q-card>
         <q-card-section>
           <div class="text-h6 text-weight-light">

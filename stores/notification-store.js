@@ -13,14 +13,14 @@ export const useNotificationStore = defineStore('notification', {
         color: 'primary',
         message: '',
         btnText: 'Dismiss',
-        userTimer: false,
+        useTimer: false,
     },
     _contactUsBanner: {
         isOpen: false,
         color: 'primary',
         message: '',
         btnText: 'Dismiss',
-        userTimer: false,
+        useTimer: false,
     }
   }),
   getters: {
@@ -34,14 +34,14 @@ export const useNotificationStore = defineStore('notification', {
                 this._secureLayoutBanner.color = color
                 this._secureLayoutBanner.message = message
                 this._secureLayoutBanner.btnText = btnText
-                this._secureLayoutBanner.userTimer = useTimer
+                this._secureLayoutBanner.useTimer = useTimer
                 this._secureLayoutBanner.isOpen = true
                 break;
               case notificationTypes.contactUsBanner:
                 this._contactUsBanner.color = color,
                 this._contactUsBanner.message = message,
                 this._contactUsBanner.btnText = btnText,
-                this._contactUsBanner.userTimer = useTimer,
+                this._contactUsBanner.useTimer = useTimer,
                 this._contactUsBanner.isOpen = true
                 break;
         }        

@@ -1,15 +1,22 @@
 <template>
-  <div class="card-style">
-    <div @click="modalStore.open('recipePreview'); recipeStore.selectRecipe(props.recipe);"
+  <div class="card-style text-body">
+    <div @click="recipeStore.selectRecipe(props.recipe); modalStore.open('recipePreview');"
       class="card-height background-style rounded-borders shadow-1"
-      :style="`background-image: linear-gradient(transparent 10%, black), url(${props.recipe.image_url});`">
+      :style="`background-image: linear-gradient(transparent 10%, black), url('${props.recipe.image_url}');`">
       <div class="q-pa-sm bottom-slot full-width">
         <div>
           <div class="flex full-width justify-end">
-            <q-btn v-if="!isInSelectedCollection && !favoriteIsSelected && collectionStore.selected" round @click="add" flat color="white" icon="add" /> <!-- add to list / remove from list -->
-            <q-btn v-if="isInSelectedCollection && !favoriteIsSelected && collectionStore.selected" round @click="remove" flat color="white" icon="remove" /> 
-            <q-btn round @click="favorite" flat color="white" 
-            :icon="isFavorite ? 'favorite' : 'favorite_border'" /> <!-- favorite / unfavorite -->
+            <q-btn :loading="toggling.adding" v-if="!isInSelectedCollection && !favoriteIsSelected && collectionStore.selected" round @click="add"
+              flat color="white" icon="add">
+            </q-btn> <!-- add to list / remove from list -->
+            <q-btn :loading="toggling.removing" v-if="isInSelectedCollection && !favoriteIsSelected && collectionStore.selected" round @click="remove"
+              flat color="white" icon="remove">
+
+            </q-btn>
+            <q-btn :loading="toggling.favorite" round @click="favorite" flat color="white" :icon="isFavorite ? 'favorite' : 'favorite_border'">
+
+            </q-btn>
+            <!-- favorite / unfavorite -->
           </div>
         </div>
 
@@ -41,6 +48,7 @@ const collectionStore = useCollectionStore();
 
 const title = ref("")
 const subtitle = ref("")
+const toggling = ref({favorite: false, adding: false, removing: false})
 
 onMounted(() => {
   let result = props.recipe.title.split("with")
@@ -72,7 +80,7 @@ const favoriteIsSelected = computed(() => {
 })
 
 const isFavorite = computed(() => {
-  if (collectionStore.favorite.recipes.findIndex(val => val.id === props.recipe.id) != -1) {
+  if (collectionStore.favorite && collectionStore.favorite.recipes.findIndex(val => val.id === props.recipe.id) != -1) {
     return true
   } else {
     return false
@@ -81,30 +89,41 @@ const isFavorite = computed(() => {
 
 const isInSelectedCollection = computed(() => {
 
-    if (collectionStore.selected && collectionStore.selected.recipes.findIndex(val => val.id === props.recipe.id) != -1) {
+  if (collectionStore.selected && collectionStore.selected.recipes.findIndex(val => val.id === props.recipe.id) != -1) {
     return true
   } else {
     return false
   }
-  } 
+}
 )
 
 const add = (event) => {
+  toggling.value.adding = true
   event.stopPropagation();
-  collectionStore.addRecipeToCollection(props.recipe.id, false)
+  collectionStore.addRecipeToCollection(props.recipe.id, false).finally(() => {
+    toggling.value.adding = false
+  })
 }
 
 const remove = (event) => {
+  toggling.value.removing = true
   event.stopPropagation();
-  collectionStore.removeRecipeFromCollection(props.recipe.id, false)
+  collectionStore.removeRecipeFromCollection(props.recipe.id, false).finally(() => {
+    toggling.value.removing = false
+  })
 }
 
 const favorite = (event) => {
+  toggling.value.favorite = true
   event.stopPropagation();
   if (isFavorite.value) {
-    collectionStore.removeRecipeFromCollection(props.recipe.id, true)
+    collectionStore.removeRecipeFromCollection(props.recipe.id, true).finally(() => {
+    toggling.value.favorite = false
+  })
   } else {
-    collectionStore.addRecipeToCollection(props.recipe.id, true)
+    collectionStore.addRecipeToCollection(props.recipe.id, true).finally(() => {
+    toggling.value.favorite = false
+  })
   }
 }
 

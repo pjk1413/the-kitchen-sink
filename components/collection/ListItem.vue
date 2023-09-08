@@ -1,5 +1,5 @@
 <template>
-      <q-item clickable :class="{ 'bg-red-1': removeable && selected, 'bg-primary': selected }" class="text-sh"
+      <q-item clickable :class="{ 'bg-red-1': removeable && selected, 'bg-primary': selected }" class="text-sh text-body"
     @click="clickableAction">
 
     <q-item-section avatar top v-auto-animate>

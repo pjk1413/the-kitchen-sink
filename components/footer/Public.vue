@@ -1,17 +1,17 @@
 <template>
   <div>
     <!-- <hr class="q-ma-xl" /> -->
-    <div class="links q-mt-xl">
+    <div class="links q-mt-xl text-body">
       <div class="">
         <div class="">
           <div class="text-h4 text-weight-light q-px-xl">
             Sign up to start using Kitchen Sink today.
           </div>
           <div class="text-h6 q-px-xl q-pt-lg">
-            Register now and recieve 1 week free on us!
+            Register now and recieve a 1 month free trial!
           </div>
           <div class="q-mx-xl q-ma-md">
-            <q-btn flat class="q-px-md bg-positive text-white" @click="registerModal()">Sign up</q-btn>
+            <q-btn size="lg" flat class="q-px-md bg-positive text-white" @click="registerModal()">Sign up</q-btn>
           </div>
           <div class="q-px-xl q-pt-lg text-subtitle2">
             We value and respect your privacy
@@ -21,7 +21,7 @@
       </div>
     </div>
     <hr class="q-mx-xl" />
-    <div class="">
+    <div class="text-body">
           <div class="text-right" :class="{ 'q-px-lg': $q.screen.gt.sm }">
             <q-btn-group flat>
               <q-btn to="/howitworks">MORE INFORMATION</q-btn>
@@ -32,7 +32,7 @@
           </div>
         </div>
     <div>
-      <div class="custom-heading text-center q-ma-xl q-pt-xl text-h1 font-heading text-weight-bold">
+      <div class="custom-heading text-center q-ma-xl q-pt-xl text-h1 text-heading">
         Kitchen Sink
       </div>
     </div>

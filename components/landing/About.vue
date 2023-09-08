@@ -1,7 +1,7 @@
 <template>
     <div class="bg-color">
         <div class="row">
-            <div class="col-md-6 q-pl-xl q-pt-xl">
+            <div class="col-md-6 q-pl-xl q-pt-xl text-body">
                 <div class="text-uppercase text-h5 q-mb-xl">
                     Our Mission,
                 </div>
@@ -21,9 +21,9 @@
                 </div>
 
             </div>
-            <div class="col-md-6">
-                <div class="q-py-md">
-                    <img class="splash-image q-mx-auto gt-xs full-height" src="~/assets/images/food-table.jpg" />
+            <div class="col-md-6 q-mx-auto">
+                <div class="q-py-md q-mx-auto" >
+                    <img style="max-height: 700px;" class="splash-image q-mx-auto gt-xs" src="~/assets/images/food-about.jpg" />
                 </div>
             </div>
         </div>
@@ -40,11 +40,8 @@
 }
 
 .splash-image {
-  object-fit: fill;
+  object-fit:cover;
   border-radius: 20px;
-
-  /* width: 100%; */
-  /* height: 100%; */
   min-width: 300px;
   display: block;
 }

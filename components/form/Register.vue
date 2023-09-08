@@ -1,12 +1,12 @@
 <template>
-    <div class="row bg-white q-pa-sm" :style="{
+    <div class="row bg-white q-pa-sm text-body" :style="{
         'min-width': '350px', 
         'width': '80vh'}">
     <div class="col relative-position">
       <div class="flex">
         <!-- <h3>LOGIN</h3> -->
         <div
-          class="q-pa-md q-mt-sm text-h3 text-dark font-heading text-weight-light"
+          class="q-pa-md q-mt-sm text-h3 text-dark text-body text-weight-light"
         >
           REGISTER
         </div>
@@ -19,12 +19,12 @@
 
       <!-- <q-separator /> -->
 
-      <q-card-section class="q-pt-none font-paragraph">
+      <q-card-section class="q-pt-none text-body">
         <q-form @submit="register">
         <div class="login-form-input q-mx-auto q-px-md font-sh">
           
           <div class="q-pa-sm">
-            <q-input v-model="email" label="Email" 
+            <q-input v-model="email" label="Email" autofocus
             :rules="[val => validateEmail(val) || 'Must be a valid email']"/>
           </div>
           <div class="q-pa-sm">
@@ -35,13 +35,13 @@
             <q-checkbox
               v-model="acceptTerms"
               label="Accept Terms of Use"
-              class="text-body2"
+              class="text-body1"
             />
             <q-btn
               dense
               unelevated
               size="sm"
-              class="text-body2 float-right q-mt-sm"
+              class="text-body1 float-right q-mt-sm"
               to="/terms"
               >View Terms of Use</q-btn
             >

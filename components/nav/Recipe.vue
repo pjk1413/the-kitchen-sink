@@ -1,7 +1,7 @@
 <template>
-  <div class="border-bottom">
+  <div class="border-bottom text-body">
     <q-toolbar class=" q-py-sm">
-
+      <q-btn :icon="addRecipe ? 'cancel' : 'add_circle'" round flat @click="addRecipe = !addRecipe"></q-btn>
       <CollectionSelect />
 
       <q-space />
@@ -11,12 +11,16 @@
     </q-toolbar>
     <div>
       <q-slide-transition>
-        <div v-if="modalStore.recipeDrawer.isOpen" class="position-relative">
+        <div v-if="addRecipe" class="position-relative">
           <div class="flex justify-center">
             <q-btn class="q-px-xl q-py-xs" outline size="sm" rounded icon="expand_less"
-              @click="modalStore.close('recipeDrawer')" />
+              @click="addRecipe = false" />
           </div>
-          <RecipeFilter />
+          <div class="border q-ma-md">
+            <RecipeImport />
+            
+          </div>
+          <!-- <RecipeFilter /> -->
         </div>
       </q-slide-transition>
 
@@ -36,11 +40,13 @@ const filterStore = useFilterStore()
 const collectionStore = useCollectionStore()
 const recipeStore = useRecipeStore();
 
+const addRecipe = ref(false);
+
 const activateFilter = () => {
   filterStore._filter = !filterStore.filter
 
   if (currentRoute.value.name.includes('shoppinglist')) {
-    console.log("filter ingredients")
+    // console.log("filter ingredients")
   } else {
     if (filterStore.filter && collectionStore.selected) {
       recipeStore._recipeList = collectionStore.selected.recipes

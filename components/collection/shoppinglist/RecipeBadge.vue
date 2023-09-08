@@ -1,5 +1,5 @@
 <template>
-    <q-badge style="width: 50%" color="transparent" class="bg-color q-mb-xs">
+    <q-badge style="width: 50%" color="transparent" class="bg-color q-mb-xs text-body">
       <div class="ellipsis">
         {{ recipe.title }}
       </div>

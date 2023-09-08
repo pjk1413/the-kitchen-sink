@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-color q-pa-xl">
+    <div class="bg-color q-pa-xl text-body">
         <div class="text-white text-h1 q-py-lg" :class="{ 'q-ma-xl': $q.screen.gt.md }">
             Embrace a fresh way to cook, shop, and explore.
         </div>
@@ -27,46 +27,13 @@
                 btnText="secondary"/>
             </div>
 
-            <!-- <div class="col-md-6">
-                <div :class="{ 'q-px-xl': $q.screen.gt.md }">
-                    <div class="text-white text-h4 q-my-lg" :class="{ 'q-ma-xl': $q.screen.gt.md }">
-                        Tokens, not subscriptions
-                    </div>
-                    <div class="text-white text-h5 q-my-lg" :class="{ 'q-ma-xl': $q.screen.gt.md }">
-                        We use a token model to provide you with an adhoc way to generate your recipes. One recipe is one
-                        token. Sweeet
-                        and simple.
-                    </div>
-                    <hr class="w-75" />
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div :class="{ 'q-px-xl': $q.screen.gt.md }">
-                    <div class="text-white text-h4 q-my-lg" :class="{ 'q-ma-xl': $q.screen.gt.md }">
-                        Shopping Lists, Optimized
-                    </div>
-                    <div class="text-white text-h5 q-my-lg" :class="{ 'q-ma-xl': $q.screen.gt.md }">
-                        Every recipe comes with a list of alternative ingredients. When generating a shopping list you have
-                        the option
-                        to optimize that list to use the fewest different ingredients possible.
-                    </div>
-                    <hr class="w-75" />
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div :class="{ 'q-px-xl': $q.screen.gt.md }">
-                    <div class="text-white text-h4 q-my-lg" :class="{ 'q-ma-xl': $q.screen.gt.md }">
-                        Collections
-                    </div>
-                    <div class="text-white text-h5 q-my-lg" :class="{ 'q-ma-xl': $q.screen.gt.md }">
-                        Build collections of recipes to drive your shopping lists or just to group your creations together.
-                    </div>
-                    <hr class="w-75" />
-                </div>
-            </div> -->
-
+        </div>
+        <div>
+            <q-btn-group spread flat class="text-white">
+                <q-btn to="/howitworks#howitworks">How it Works</q-btn>
+                <q-btn to="/howitworks#registration">Registration</q-btn>
+                <q-btn to="/howitworks#pricing">Pricing</q-btn>
+            </q-btn-group>
         </div>
     </div>
 </template>

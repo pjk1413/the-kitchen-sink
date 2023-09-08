@@ -1,7 +1,7 @@
 <template>
-  <q-btn icon="library_books" :label="collectionStore.selected && collectionStore.selected.name" flat>
+  <q-btn class="text-body" icon="library_books" :label="$q.screen.gt.sm && collectionStore.selected && collectionStore.selected.name" flat>
 
-    <q-menu :class="{ 'w-75': $q.screen.lt.sm }">
+    <q-menu class="text-body" :class="{ 'w-75': $q.screen.lt.sm }">
       <q-list style="min-width: 150px">
 
         <!-- Add new collection -->

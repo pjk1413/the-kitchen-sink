@@ -1,12 +1,14 @@
 <template>
     <NavRecipe />
     <NavShoppingList />
-    <div>
+    <div class="text-body">
         <div style="max-width: 800px;" class="q-mx-auto q-my-lg">
-            <q-list bordered v-if="collectionStore.selected && collectionStore.shoppingList.length > 0">
+            <div v-if="ingredients.length > 0 || additionalItems.length > 0">
+
+            <q-list bordered v-if="ingredients.length > 0">
                 <q-item tag="label" v-ripple v-for="ingredient in ingredients">
                     <q-item-section side top>
-                        <q-checkbox v-model="ingredient.is_checked" @update:model-value="toggleCheckbox(ingredient)" />
+                        <q-checkbox v-model="ingredient.is_checked" @update:model-value="toggle('ingredient', ingredient)" />
                     </q-item-section>
 
                     <q-item-section>
@@ -26,7 +28,33 @@
                     </q-item-section>
                 </q-item>
 
+                <q-separator />
+
             </q-list>
+            
+            <q-list bordered class="q-mt-sm" v-if="additionalItems.length > 0">
+                <q-item tag="label" v-ripple v-for="item in additionalItems">
+                    <q-item-section side top>
+                        <q-checkbox v-model="item.is_checked" @update:model-value="toggle('additional', item)" />
+                    </q-item-section>
+
+                    <q-item-section>
+                        <q-item-label>{{ capitalize(item.name) }}</q-item-label>
+
+                        <q-item-label caption>
+                            {{ item.detail }}
+                        
+                        </q-item-label>
+                    </q-item-section>
+
+                    <q-item-section side>
+                        <q-btn @click="removeAdditionalItem(item)" icon="delete" flat round></q-btn>
+                    </q-item-section>
+                </q-item>
+            </q-list>
+
+            </div>
+
             <div v-else class="text-center">
                 <h3 class="text-weight-light">Select a collection <br> or <br>add recipes to selected collection</h3>
             </div>
@@ -53,9 +81,9 @@ watch(() => collectionStore.selected, (o, n) => {
     collectionStore.getShoppingList()
 })
 
-const ingredients = computed(() => {
-    if (collectionStore.selected) {
-        return collectionStore.shoppingList.filter(val => {
+const additionalItems = computed(() => {
+    if (collectionStore.selected && collectionStore.items && collectionStore.items.additional_items) {
+        return Object.values(collectionStore.items.additional_items).filter(val => {
             if (filterStore.filter) {
                 return !val.is_checked
             } else {
@@ -67,6 +95,25 @@ const ingredients = computed(() => {
     }
 })
 
+const ingredients = computed(() => {
+    if (collectionStore.selected && collectionStore.items && collectionStore.items.shopping_list) {
+        return Object.values(collectionStore.items.shopping_list).filter(val => {
+            if (filterStore.filter) {
+                return !val.is_checked
+            } else {
+                return true
+            }
+        })
+    } else {
+        return []
+    }
+})
+
+const removeAdditionalItem = (item) => {
+    console.log(item)
+    collectionStore.removeAdditionalItem(item)
+}
+
 const capitalize = (str) => {
     str = str.toLowerCase()
     .split(' ')
@@ -75,9 +122,8 @@ const capitalize = (str) => {
     return str
 }
 
-const toggleCheckbox = (ingredient) => {
-    console.log(ingredient)
-    collectionStore.toggleCheckIngredient(ingredient.id)
+const toggle = (type, item) => {
+    collectionStore.toggleCheckIngredient(type, item.id)
 }
 </script>
 

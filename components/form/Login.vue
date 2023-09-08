@@ -1,10 +1,10 @@
 <template>
-    <div class="row bg-white q-pa-sm" style="min-width: 350px; width: 80vh">
+    <div class="row bg-white q-pa-sm text-body" style="min-width: 350px; width: 80vh">
     <div class="col relative-position">
       <div class="flex">
         <!-- <h3>LOGIN</h3> -->
         <div
-          class="q-pa-md q-mt-sm text-h3 text-dark font-heading text-weight-light"
+          class="q-pa-md q-mt-sm text-h3 text-dark text-body text-weight-light"
         >
           LOGIN
         </div>
@@ -16,11 +16,11 @@
       </div>
 
 
-      <q-card-section class="q-pt-none font-paragraph">
+      <q-card-section class="q-pt-none">
         <div class="login-form-input q-mx-auto q-px-md font-sh">
           <q-form @submit="login">
           <div class="q-pa-sm">
-            <q-input v-model="email" label="Email" 
+            <q-input v-model="email" label="Email" autofocus
             :rules="[val => validateEmail(val) || 'Must be a valid email']"/>
           </div>
           <div class="q-pa-sm">
@@ -62,7 +62,7 @@
               dense
               unelevated
               size="sm"
-              class="text-body2"
+              class="text-body1"
               @click="openRegister"
               >Need to sign up? Register here</q-btn
             >

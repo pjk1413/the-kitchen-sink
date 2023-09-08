@@ -1,5 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Gilda+Display&family=Questrial&family=Spectral:wght@300&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&family=Montserrat:wght@100;200;300;400;500&display=swap');
+// @import url("https://fonts.googleapis.com/css2?family=Gilda+Display&family=Questrial&family=Spectral:wght@300&display=swap");
+// @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&family=Montserrat:wght@100;200;300;400;500&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
 
 @import '_global.scss';
 @import '_backgrounds.scss';
@@ -19,7 +21,7 @@ $warning: #fb6107;
 
 
 // FONTS
-$heading: 'Barlow Condensed', sans-serif;
-$subheading: 'Montserrat', sans-serif;
-$body: "Spectral", serif;
+$heading: 'Abril Fatface', cursive;
+$body: 'Poppins', sans-serif;
+$subheading: "Poppins", serif;
 

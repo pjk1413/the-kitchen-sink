@@ -5,14 +5,14 @@
       :class="{ 'q-px-lg': $q.screen.gt.sm }"
     >
       
-      <q-btn class="text-weight-bold q-mt-sm font-heading" flat to="/">
-        KITCHEN SINK
+      <q-btn class="nav-home-size q-mt-sm text-heading" flat to="/" no-caps>
+        Kitchen Sink
       </q-btn>
 
       <q-space />
 
       <q-btn v-if="$q.platform.is.mobile" flat round dense icon="menu">
-        <q-menu>
+        <q-menu class="text-body">
           <q-list style="min-width: 100px">
             <q-item v-ripple clickable v-close-popup to="/howitworks">
               <q-item-section>HOW IT WORKS</q-item-section>
@@ -26,8 +26,8 @@
           </q-list>
         </q-menu>
         </q-btn>
-      <q-btn-group flat shrink v-else>
-        <q-btn to="/howitworks">HOW IT WORKS</q-btn>
+      <q-btn-group flat shrink v-else class="text-body">
+        <q-btn  to="/howitworks">HOW IT WORKS</q-btn>
         <q-btn @click="$refs.login.show()">LOGIN</q-btn>
         <q-btn @click="$refs.register.show()">SIGN UP</q-btn>
       </q-btn-group>
@@ -73,6 +73,9 @@ const modalStore = useModalStore();
 </script>
 
 <style lang="scss" scoped>
+  .nav-home-size {
+    font-size: 1.2rem;;
+  }
   .cover {
     object-fit: cover;
   }

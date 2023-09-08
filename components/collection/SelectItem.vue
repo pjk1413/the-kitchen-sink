@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable class="font-paragraph text-body2" :active="collectionStore.selected && collectionStore.selected.name == props.collection.name
+  <q-item clickable class="text-body text-body2" :active="collectionStore.selected && collectionStore.selected.name == props.collection.name
     " active-class="bg-grey-5 text-light">
 
     <q-item-section v-ripple @click="select" v-close-popup>

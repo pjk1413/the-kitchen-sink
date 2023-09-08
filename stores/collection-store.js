@@ -8,14 +8,14 @@ export const useCollectionStore = defineStore("collection", {
     _editCollection: false,
     _selectedCollection: null,
     _collections: [],
-    _shoppinglist: []
+    _itemList: null
   }),
   getters: {
     collections: (state) => state._collections,
     selected: (state) => state._selectedCollection,
     favorite: (state) => state._collections.filter(val => val.is_favorite)[0],
     edit: (state) => state._editCollection,
-    shoppingList: (state) => state._shoppinglist
+    items: (state) => state._itemList
   },
   actions: {
     openEdit() {
@@ -101,7 +101,8 @@ export const useCollectionStore = defineStore("collection", {
       }
 
       const { data, error } = await useFetch(`${config.public.apiBase}api/collections/${id}/`,
-      { method: 'PATCH', headers: { Authorization: `Bearer ${authStore.accessToken}`}, body: {add: recipeId}})
+      { method: 'PATCH', headers: { Authorization: `Bearer ${authStore.accessToken}`}, body: 
+      { alter: { type: 'ingredient', action: 'add', id: recipeId }}})
 
       if (data.value) {
         this.selectCollection(data.value)
@@ -129,11 +130,12 @@ export const useCollectionStore = defineStore("collection", {
       }
 
       const { data, error } = await useFetch(`${config.public.apiBase}api/collections/${id}/`,
-      { method: 'PATCH', headers: { Authorization: `Bearer ${authStore.accessToken}`}, body: { remove: recipeId }})
+      { method: 'PATCH', headers: { Authorization: `Bearer ${authStore.accessToken}`}, body: 
+      { alter: { type: 'ingredient', action: 'remove', id: recipeId }}})
 
       if (data.value) {
         this.selectCollection(data.value)
-
+        
         const colId = this._collections.findIndex(
           (val) => val.id == this._selectedCollection.id
         );
@@ -152,49 +154,76 @@ export const useCollectionStore = defineStore("collection", {
 
       let id = this._selectedCollection && this._selectedCollection.id
 
-      const { data, error } = await useFetch(`${config.public.apiBase}api/shoppinglist/${id}/`,
+      const { data, error } = await useFetch(`${config.public.apiBase}api/list/${id}/`,
       { headers: { Authorization: `Bearer ${authStore.accessToken}`}})
 
       if (data.value) {
-        this._shoppinglist = data.value.shopping_list
+        this._itemList = data.value
       }
 
       if (error.value) {
         notificationStore.open('secureLayoutBanner', "Error retrieving shopping list", 'negative', 'Dismiss', true)
       }
     },
-    async toggleCheckIngredient(ingredient_id) {
+    async toggleCheckIngredient(type, item_id) {
       const authStore = useAuthStore()
       const config = useRuntimeConfig()
       const notificationStore = useNotificationStore()
 
       let id = this._selectedCollection && this._selectedCollection.id
 
-      const { data, error } = await useFetch(`${config.public.apiBase}api/shoppinglist/${id}/?toggle=${ingredient_id}`,
-      {method: 'PATCH', headers: { Authorization: `Bearer ${authStore.accessToken}`}})
+      const { data, error } = await useFetch(`${config.public.apiBase}api/list/${id}/`,
+      {method: 'PATCH', headers: { Authorization: `Bearer ${authStore.accessToken}`}, body: {
+        toggle: { type: type, id: item_id }
+      }})
+
+      if (data.value) {
+        this._itemList = data.value
+      }
 
       if (error.value) {
         notificationStore.open('secureLayoutBanner', "Error toggling shopping list status", 'negative', 'Dismiss', true)
       }
-    }
-    // async toggleCheckIngredient(ingredient) {
-    //   return patch(
-    //     `api/details/${ingredient.id}/`,
-    //     { is_checked: !ingredient.is_checked },
-    //     "Error saving ingredient check",
-    //     null
-    //   ).then((response) => {
-    //     this.selectedCollection.recipes.forEach((recipe) => {
-    //       const id = recipe.ingredients.findIndex(
-    //         (val) => val.id === ingredient.id
-    //       );
+    },
+    async addAdditionalItem(item) {
+      const authStore = useAuthStore()
+      const config = useRuntimeConfig()
+      const notificationStore = useNotificationStore()
 
-    //       if (id > -1) {
-    //         recipe.ingredients[id].is_checked =
-    //           !recipe.ingredients[id].is_checked;
-    //       }
-    //     });
-    //   });
-    // },
+      let id = this._selectedCollection && this._selectedCollection.id
+
+      const { data, error } = await useFetch(`${config.public.apiBase}api/list/${id}/`,
+      { method: 'PATCH', headers: { Authorization: `Bearer ${authStore.accessToken}`}, 
+      body: { alter: { type: 'additional', action: 'add', data: { name: item.name, detail: item.detail }}}})
+
+      if (data.value) {
+        this._itemList = data.value 
+        notificationStore.open('secureLayoutBanner', "Succesfully added item to list", 'primary', 'Dismiss', true)
+      }
+
+      if (error.value) {
+        notificationStore.open('secureLayoutBanner', "Error adding item to list", 'negative', 'Dismiss', true)
+      }
+    },
+    async removeAdditionalItem(item) {
+      const authStore = useAuthStore()
+      const config = useRuntimeConfig()
+      const notificationStore = useNotificationStore()
+
+      let id = this._selectedCollection && this._selectedCollection.id
+
+      const { data, error } = await useFetch(`${config.public.apiBase}api/list/${id}/`,
+      { method: 'PATCH', headers: { Authorization: `Bearer ${authStore.accessToken}`}, 
+      body: { alter: { type: 'additional', action: 'remove', id: item.id }}})
+
+      if (data.value) {
+        this._itemList = data.value 
+        notificationStore.open('secureLayoutBanner', "Succesfully added item to list", 'primary', 'Dismiss', true)
+      }
+
+      if (error.value) {
+        notificationStore.open('secureLayoutBanner', "Error adding item to list", 'negative', 'Dismiss', true)
+      }
+    }
   },
 });

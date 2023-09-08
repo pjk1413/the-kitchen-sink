@@ -1,7 +1,10 @@
 <template>
     <a :href="props.link" target="_blank">
-      <q-chip :outline="props.border" :color="source.color" class="float-company">
-          <img class="img-style" :style="`width: ${source.width}px;`" :src="source.thumbnail_image">
+      <q-chip :outline="props.border" :color="source && source.color" class="float-company">
+          <img v-if="thumbnail" class="img-style" :style="`width: ${source.width}px;`" :src="thumbnail">
+          <div v-else>
+            {{ source && source.website.replace('www.', '') }}
+          </div>
       </q-chip>
     </a>
   </template>
@@ -24,11 +27,19 @@
       return val.id === props.source
     })[0]
   })
+
+  const thumbnail = computed(() => {
+    if (source.value && source.value.thumbnail_image != 'NOTSET') {
+      return source.value.thumbnail_image
+    } else {
+      return false
+    }
+  })
   
-  const openLink = (event) => {
-    event.stopPropagation();
-    console.log("LINK")
-  }
+  // const openLink = (event) => {
+  //   event.stopPropagation();
+  //   console.log("LINK")
+  // }
   
   </script>
   

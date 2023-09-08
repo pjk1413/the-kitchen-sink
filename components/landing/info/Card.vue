@@ -14,9 +14,9 @@
                 <div class="text-body1 q-mt-sm">
                     {{ props.text }}
                 </div>
-                <div class="q-mt-md q-ml-lg">
+                <!-- <div class="q-mt-md q-ml-lg">
                     <q-btn flat>{{ props.btnText }}</q-btn>
-                </div>
+                </div> -->
                 
 
             </q-card-section>

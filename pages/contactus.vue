@@ -1,6 +1,6 @@
 <template>
     <NotifcationLayoutBanner :name="notificationTypes.contactUsBanner" />
-    <div class="q-mx-auto q-my-xl" :class="{ 'w-75': $q.screen.gt.sm }">
+    <div class="q-mx-auto q-my-xl text-body" :class="{ 'w-75': $q.screen.gt.sm }">
     <div class="text-h1 font-heading q-pa-sm">Contact Us</div>
     <div class="text-body1 font-paragraph q-pa-sm">
       We try to get back to all inquiries within 1-2 business days. Please be
@@ -23,7 +23,7 @@
       <div class="q-pa-sm text-center">
         <q-btn
           :label="!canSend ? 'Fill out all fields' : 'Send Message'"
-          class="q-pa-md"
+          class="q-pa-md text-body"
           :color="!canSend ? 'negative' : 'primary'"
           :disable="!canSend"
           :outline="!canSend"

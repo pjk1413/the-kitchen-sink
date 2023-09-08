@@ -8,10 +8,12 @@ const refreshKey = "refresh_token";
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     _user: null,
+    _is_staff: false,
     _access: null,
     _refresh: null,
   }),
   getters: {
+    isStaff: (state) => state._is_staff,
     user: (state) => state._user,
     accessToken: (state) => {
       const access = useCookie(accessKey, { sameSite: 'lax' });
@@ -49,6 +51,16 @@ export const useAuthStore = defineStore("auth", {
     },
   },
   actions: {
+    async getStaff() {
+      const config = useRuntimeConfig();
+      const { data, status, error } = await useFetch(
+        `${config.public.apiBase}api/is_staff/`, { headers: { Authorization: `Bearer ${this.accessToken}`}}
+      );
+
+      if (data.value) {
+        this._is_staff = data.value
+      }
+    },
     async register(email, password) {
       const config = useRuntimeConfig();
       const { data, status, error } = await useFetch(
@@ -84,8 +96,11 @@ export const useAuthStore = defineStore("auth", {
           this._access = data.value.access;
           this._refresh = data.value.refresh;
 
+          let future = new Date();
+          future.setDate(future.getDate() + 30);
+
           const access = useCookie(accessKey, {
-            sameSite: 'lax',
+            sameSite: 'lax', expires: future
           });
           const refresh = useCookie(refreshKey, {
             sameSite: 'lax',

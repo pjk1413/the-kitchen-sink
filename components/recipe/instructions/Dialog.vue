@@ -5,6 +5,7 @@
     :maximized="maximizedToggle"
     transition-show="slide-up"
     transition-hide="slide-down"
+    class="text-body"
   >
     <q-card class="bg-positive text-white">
       <q-bar>
@@ -62,22 +63,22 @@
           </q-carousel-slide>
         </q-carousel>
       </q-card-section>
-      <!-- <q-card-section
+      <q-card-section
         class="no-padding"
         :class="{ 'q-pt-sm': $q.screen.lt.sm }"
       >
         <div class="row q-pa-none q-ma-none">
           <div class="col-md-6 no-padding">
-            <recipe-timer :step="recipe.steps[slide - 1].instruct" />
+            <RecipeInstructionsTimer :step="recipeStore.selected.instructions[slide]"/>
+            <!-- <recipe-timer :step="recipe.steps[slide - 1].instruct" /> -->
           </div>
           <div class="col-md-6 no-padding">
-            <list-ingredients
-              :recipe="recipe"
-              :step="recipe.steps[slide - 1].instruct"
+            <RecipeInstructionsIngredients
+              :step="recipeStore.selected.instructions[slide]"
             />
           </div>
         </div>
-      </q-card-section> -->
+      </q-card-section>
     </q-card>
   </q-dialog>
   <!-- <video loop :src="videoSource" autoplay muted></video> -->
@@ -87,6 +88,8 @@
 import { useModalStore } from '~/stores/modal-store';
 import { useRecipeStore } from '~/stores/recipe-store';
 import { ref } from 'vue'
+
+// console.log(recipeStore.selected)
 
 const modalStore = useModalStore()
 const recipeStore = useRecipeStore()
