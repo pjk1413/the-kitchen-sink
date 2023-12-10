@@ -1,8 +1,8 @@
 <template>
   <div class="border-bottom text-body">
     <q-toolbar class=" q-py-sm">
-      <q-btn :icon="addRecipe ? 'cancel' : 'add_circle'" round flat @click="addRecipe = !addRecipe"></q-btn>
-      <CollectionSelect />
+      <q-btn v-if="authStore.verify" :icon="addRecipe ? 'cancel' : 'add_circle'" round flat @click="addRecipe = !addRecipe"></q-btn>
+      <CollectionSelect v-if="authStore.verify" />
 
       <q-space />
       <FormSearchInput />
@@ -33,12 +33,14 @@ import { useRecipeStore } from '~/stores/recipe-store';
 import { useCollectionStore } from '~/stores/collection-store';
 import { useFilterStore } from '~/stores/filter-store';
 import { useModalStore } from '~/stores/modal-store';
+import { useAuthStore } from '~/stores/auth-store';
 
 const { currentRoute } = useRouter();
 const modalStore = useModalStore();
 const filterStore = useFilterStore()
 const collectionStore = useCollectionStore()
 const recipeStore = useRecipeStore();
+const authStore = useAuthStore();
 
 const addRecipe = ref(false);
 

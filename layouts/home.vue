@@ -2,7 +2,7 @@
 
     <q-layout view="hHh Lpr lff">
     <q-header class="bg-white">
-      <NavSecure />
+      <NavHome />
     </q-header>
     
     <div>

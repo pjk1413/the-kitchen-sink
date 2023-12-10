@@ -8,7 +8,7 @@
             Sign up to start using Kitchen Sink today.
           </div>
           <div class="text-h6 q-px-xl q-pt-lg">
-            Register now and recieve a 1 month free trial!
+            Register now!
           </div>
           <div class="q-mx-xl q-ma-md">
             <q-btn size="lg" flat class="q-px-md bg-positive text-white" @click="registerModal()">Sign up</q-btn>

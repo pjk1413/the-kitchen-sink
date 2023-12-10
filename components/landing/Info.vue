@@ -32,7 +32,7 @@
             <q-btn-group spread flat class="text-white">
                 <q-btn to="/howitworks#howitworks">How it Works</q-btn>
                 <q-btn to="/howitworks#registration">Registration</q-btn>
-                <q-btn to="/howitworks#pricing">Pricing</q-btn>
+                <q-btn to="/howitworks#moreinformation">More Information</q-btn>
             </q-btn-group>
         </div>
     </div>

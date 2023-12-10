@@ -112,6 +112,7 @@
 
 <script setup>
 import { validateEmail, validatePassword } from 'assets/js/validationUtils';
+import { useModalStore } from '~/stores/modal-store';
 import { useAuthStore } from '~/stores/auth-store';
 import { STRIPE_PAYMENT_LINK } from "~/stores/constant-store";
 
@@ -121,6 +122,7 @@ const password = ref("");
 const acceptTerms = ref(false);
 const bannerMessage = ref("");
 const bannerStatus = ref(false);
+const modalStore = useModalStore();
 
 const validated = computed(() => {
   let validEmail = email.value.match(
@@ -136,11 +138,12 @@ const validated = computed(() => {
 const register = () => {
   const authStore = useAuthStore()
   authStore.register(email.value, password.value).then(data => {
-    if (data.value) {
-        navigateTo(`${STRIPE_PAYMENT_LINK}?prefilled_email=${data.value.email}&client_reference_id=${data.value.id}`, {
-          external: true, open: {target: '_blank'}
-        })
-      }
+    // TODO: turn on to make this force a credit card sign up
+    // if (data.value) {
+    //     navigateTo(`${STRIPE_PAYMENT_LINK}?prefilled_email=${data.value.email}&client_reference_id=${data.value.id}`, {
+    //       external: true, open: {target: '_blank'}
+    //     })
+    //   }
   })
 
 }

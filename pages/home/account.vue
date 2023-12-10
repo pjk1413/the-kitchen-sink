@@ -1,9 +1,10 @@
 <template>
   <div class="q-mx-auto text-body" style="max-width: 400px;">
 
-    <div v-if="accountStore.user && !accountStore.user.active_subscription">
+    <!-- TODO: turn on to activate payments -->
+    <!-- <div v-if="accountStore.user && !accountStore.user.active_subscription">
       <NotifcationSubscriptionStatus :expires="accountStore.user && accountStore.user.active_until" />
-    </div>  
+    </div>   -->
 
     <q-card class="q-ma-xl">
       <q-card-section>
@@ -46,15 +47,16 @@
               <q-item-label>Contact Us</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item @click="accountStore.subscribe()" clickable v-ripple>
+          <!-- TODO turn on to activate payments -->
+          <!-- <q-item @click="accountStore.subscribe()" clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="manage_accounts"></q-icon>
             </q-item-section>
             <q-item-section>
               <q-item-label>Manage Subscription</q-item-label>
             </q-item-section>
-          </q-item>
-          <q-item @click="authStore.logout()" clickable v-ripple>
+          </q-item> -->
+          <q-item @click="authStore.logout(); location.reload(true);" clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="logout"></q-icon>
             </q-item-section>
@@ -90,7 +92,7 @@ import { notificationTypes, useNotificationStore } from '~/stores/notification-s
 import { useAccountStore } from '~/stores/account-store';
 import { useAuthStore } from '~/stores/auth-store';
 
-definePageMeta({ layout: 'secure' })
+definePageMeta({ layout: 'home' })
 
 const config = useRuntimeConfig();
 const accountStore = useAccountStore();
@@ -128,9 +130,10 @@ const user = computed(() => {
   }
 })
 
-const subscription = computed(() => {
-  return accountStore.user && accountStore.user.active_subscription
-})
+// TODO: turn on to activate payments
+// const subscription = computed(() => {
+//   return accountStore.user && accountStore.user.active_subscription
+// })
 </script>
 
 <style lang="scss" scoped>

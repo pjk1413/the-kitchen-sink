@@ -66,7 +66,7 @@
 import { useFilterStore } from '~/stores/filter-store';
 import { useCollectionStore } from '~/stores/collection-store';
 
-definePageMeta({ layout: 'secure' })
+definePageMeta({ layout: 'home' })
 
 onMounted(() => {
     if (collectionStore.selected != null) {

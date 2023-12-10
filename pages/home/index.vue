@@ -21,7 +21,7 @@
 <script setup>
 import { useRecipeStore } from '~/stores/recipe-store';
 // import { recipes as _recipes } from '~/assets/data/sampleRecipeData'
-definePageMeta({ layout: 'secure', isSecure: true })
+definePageMeta({ layout: 'home', isSecure: false })
 const recipeStore = useRecipeStore()
 
 // need to use nextTick to properly render initial data

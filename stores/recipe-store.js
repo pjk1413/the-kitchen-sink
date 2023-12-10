@@ -33,8 +33,11 @@ export const useRecipeStore = defineStore("recipe", {
       const config = useRuntimeConfig()
       
       const { data, error } = await useFetch(`${config.public.apiBase}api/sources`, {
-        headers: { Authorization: `Bearer ${authStore.accessToken}` }
+        // headers: { Authorization: `Bearer ${authStore.accessToken}` }
       })
+
+      console.log(error)
+
       if (data.value) {
         this._sources = data.value.results
       }
@@ -52,7 +55,9 @@ export const useRecipeStore = defineStore("recipe", {
       const config = useRuntimeConfig()
 
         const { data, error } = await useFetch(`${this._pagination.next}${searchStr}`, 
-        { headers: { Authorization: `Bearer ${authStore.accessToken}`}})
+        { 
+          // headers: { Authorization: `Bearer ${authStore.accessToken}`}
+        })
 
         this._pagination = {
           next: data.value.next,
@@ -96,7 +101,9 @@ export const useRecipeStore = defineStore("recipe", {
       const config = useRuntimeConfig()
 
         const { data, error } = await useFetch(`${config.public.apiBase}api/recipes${searchStr}`, 
-        { headers: { Authorization: `Bearer ${authStore.accessToken}`}})
+        { 
+          // headers: { Authorization: `Bearer ${authStore.accessToken}`}
+        })
 
         this._pagination = {
           next: data.value.next,

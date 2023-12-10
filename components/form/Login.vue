@@ -15,7 +15,6 @@
        
       </div>
 
-
       <q-card-section class="q-pt-none">
         <div class="login-form-input q-mx-auto q-px-md font-sh">
           <q-form @submit="login">

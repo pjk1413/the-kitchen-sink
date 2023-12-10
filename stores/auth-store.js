@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import jwt_decode from "jwt-decode";
 import { STRIPE_PAYMENT_LINK } from "./constant-store";
+import { useModalStore } from "./modal-store";
 
 const accessKey = "access_token";
 const refreshKey = "refresh_token";
@@ -68,6 +69,12 @@ export const useAuthStore = defineStore("auth", {
         { method: "POST", body: { username: email, email: email, password: password } }
       );
 
+      if (data.value) {
+        router.push('/home')
+        this.login(email, password)
+        useModalStore().close('register')
+      }
+
       return data
     },
     logout() {
@@ -111,7 +118,8 @@ export const useAuthStore = defineStore("auth", {
             refresh.value = data.value.refresh;
 
             const router = useRouter();
-            router.push("/secure");
+            router.push("/home");
+            useModalStore().close('login')
             return true
           }
         } else {

@@ -5,7 +5,7 @@
       :class="{ 'q-px-lg': $q.screen.gt.sm }"
     >
       
-      <q-btn class="nav-home-size q-mt-sm text-heading" flat to="/" no-caps>
+      <q-btn class="nav-home-size q-mt-sm text-heading" flat to="/home" no-caps>
         Kitchen Sink
       </q-btn>
 
@@ -17,10 +17,13 @@
             <q-item v-ripple clickable v-close-popup to="/howitworks">
               <q-item-section>HOW IT WORKS</q-item-section>
             </q-item>
-            <q-item v-ripple clickable v-close-popup @click="$refs.login.show()">
+            <q-item v-ripple clickable v-close-popup to="/home">
+              <q-item-section>HOME</q-item-section>
+            </q-item>
+            <q-item v-if="!authStore.verify" v-ripple clickable v-close-popup @click="$refs.login.show()">
               <q-item-section>LOGIN</q-item-section>
             </q-item>
-            <q-item v-ripple clickable v-close-popup @click="$refs.register.show()">
+            <q-item v-if="!authStore.verify" v-ripple clickable v-close-popup @click="$refs.register.show()">
               <q-item-section>SIGN UP</q-item-section>
             </q-item>
           </q-list>
@@ -28,14 +31,15 @@
         </q-btn>
       <q-btn-group flat shrink v-else class="text-body">
         <q-btn  to="/howitworks">HOW IT WORKS</q-btn>
-        <q-btn @click="$refs.login.show()">LOGIN</q-btn>
-        <q-btn @click="$refs.register.show()">SIGN UP</q-btn>
+        <q-btn v-if="authStore.verify" to="/home">HOME</q-btn>
+        <q-btn v-if="!authStore.verify" @click="$refs.login.show()">LOGIN</q-btn>
+        <q-btn v-if="!authStore.verify" @click="$refs.register.show()">SIGN UP</q-btn>
       </q-btn-group>
     </q-toolbar>
 
     <q-dialog
       persistent
-      :maximized="isMobile"
+      :maximized="$q.platform.is.mobile"
       transition-show="scale"
       transition-hide="scale"
       v-model="modalStore.login.isOpen"
@@ -46,7 +50,7 @@
 
     <q-dialog
       v-model="modalStore.register.isOpen"
-      :maximized="isMobile"
+      :maximized="$q.platform.is.mobile"
       persistent
       transition-show="scale"
       transition-hide="scale"
@@ -59,6 +63,7 @@
 
 <script setup>
 import { useQuasar } from 'quasar'
+import { useAuthStore } from '~/stores/auth-store';
 import { useModalStore } from '~/stores/modal-store'
 const $q = useQuasar();
 
@@ -69,6 +74,7 @@ onMounted(() => {
 });
 
 const modalStore = useModalStore();
+const authStore = useAuthStore();
 
 </script>
 

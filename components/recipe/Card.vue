@@ -13,7 +13,7 @@
               flat color="white" icon="remove">
 
             </q-btn>
-            <q-btn :loading="toggling.favorite" round @click="favorite" flat color="white" :icon="isFavorite ? 'favorite' : 'favorite_border'">
+            <q-btn v-if="authStore.verify" :loading="toggling.favorite" round @click="favorite" flat color="white" :icon="isFavorite ? 'favorite' : 'favorite_border'">
 
             </q-btn>
             <!-- favorite / unfavorite -->
@@ -37,6 +37,7 @@
 import { useRecipeStore } from '~/stores/recipe-store';
 import { useModalStore } from '~/stores/modal-store';
 import { useCollectionStore } from '~/stores/collection-store';
+import { useAuthStore } from '~/stores/auth-store';
 
 const props = defineProps({
   recipe: Object
@@ -45,6 +46,7 @@ const props = defineProps({
 const modalStore = useModalStore()
 const recipeStore = useRecipeStore()
 const collectionStore = useCollectionStore();
+const authStore = useAuthStore();
 
 const title = ref("")
 const subtitle = ref("")
