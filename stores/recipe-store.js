@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { useAuthStore } from "./auth-store";
 import { useFilterStore } from "./filter-store";
 import { useNotificationStore } from "./notification-store";
+import { useLoadingStore } from "./loading-store";
 // import { useFilterStore } from "./filter-store";
 
 export const useRecipeStore = defineStore("recipe", {
@@ -26,6 +27,7 @@ export const useRecipeStore = defineStore("recipe", {
   },
   actions: {
     selectRecipe(recipe) {
+      console.log(recipe)
       this._selectedRecipe = recipe
     },
     async getSources() {
@@ -35,8 +37,6 @@ export const useRecipeStore = defineStore("recipe", {
       const { data, error } = await useFetch(`${config.public.apiBase}api/sources`, {
         // headers: { Authorization: `Bearer ${authStore.accessToken}` }
       })
-
-      console.log(error)
 
       if (data.value) {
         this._sources = data.value.results
@@ -89,6 +89,8 @@ export const useRecipeStore = defineStore("recipe", {
         }
     },
     async getRecipes() {
+      const loadingStore = useLoadingStore();
+      loadingStore.setLoadingRecipes(true)
       const filterStore = useFilterStore();
       const search = filterStore.search
       let searchStr = '';
@@ -111,7 +113,11 @@ export const useRecipeStore = defineStore("recipe", {
         }
 
         if (data.value) {
-          this._recipeList = data.value.results    
+          this._recipeList = data.value.results   
+          setTimeout(() => {
+            loadingStore.setLoadingRecipes(false) 
+          }, 1000)
+          
         }
     },
     async importRecipe(url) {

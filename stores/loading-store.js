@@ -8,16 +8,23 @@ export const exampleLoader = {
 
 export const useLoadingStore = defineStore('loading', {
   state: () => ({
+    _isLoadingRecipes: false,
     loaders: [],
+
 
   }),
   getters: {
     all: (state) => state.loaders,
     loading: (state, id) => {
       return state.loaders.filter((value, index, arr) => value.id === id)
-    }
+    },
+    loadingRecipes: (state) => state._isLoadingRecipes
+
   },
   actions: {
+    setLoadingRecipes(loading) {
+      this._isLoadingRecipes = loading
+    },
     create(id, type) {
       this.loaders.push({ id: id, type: type, isLoading: true })
     },

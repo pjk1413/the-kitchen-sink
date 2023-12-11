@@ -1,6 +1,6 @@
 <template>
   <div class="card-style text-body">
-    <div @click="recipeStore.selectRecipe(props.recipe); modalStore.open('recipePreview');"
+    <div @click="selectRecipe"
       class="card-height background-style rounded-borders shadow-1"
       :style="`background-image: linear-gradient(transparent 10%, black), url('${props.recipe.image_url}');`">
       <div class="q-pa-sm bottom-slot full-width">
@@ -60,7 +60,13 @@ onMounted(() => {
   } else {
     title.value = props.recipe.title
   }
+  console.log(modalStore.recipePreview)
 })
+
+const selectRecipe = () => {
+  recipeStore.selectRecipe(props.recipe); 
+  modalStore.open('recipePreview');
+}
 
 const tags = computed(() => {
   let results = props.recipe.diets
