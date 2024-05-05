@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="q-py-md font-paragraph"> -->
   <q-toolbar class="q-mx-auto q-px-lg text-dark text-body">
-    <q-btn class="q-mt-sm text-heading" flat to="">
+    <q-btn class="q-mt-sm text-heading" flat to="/home">
       KITCHEN SINK
     </q-btn>
     <q-space />

@@ -60,7 +60,6 @@ onMounted(() => {
   } else {
     title.value = props.recipe.title
   }
-  console.log(modalStore.recipePreview)
 })
 
 const selectRecipe = () => {

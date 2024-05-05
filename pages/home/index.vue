@@ -13,6 +13,8 @@
         </div>
       </div>
       <RecipeButtonLoadMore />
+      <RecipeInstructionsDialog />
+      <!-- <RecipeEditDialog /> -->
       <!-- <recipe-instructions-dialog /> -->
       <!-- <recipe-edit-dialog /> -->
     </div>
@@ -26,18 +28,24 @@ import { useLoadingStore } from '~/stores/loading-store';
 definePageMeta({ layout: 'home', isSecure: false })
 const recipeStore = useRecipeStore()
 const loadingStore = useLoadingStore();
+const config = useRuntimeConfig();
 
+loadingStore.setLoadingRecipes(true);
+$fetch(`${config.public.apiBase}api/sources`).then(res => {
+  recipeStore.setSources(res.results)
+})
 
+$fetch(`${config.public.apiBase}api/recipes`).then(res => {
+  recipeStore.setRecipes(res.results, {
+    next: res.next,
+    count: res.count
+  })
+})
 
 const loading = computed(() => {
   return loadingStore.loadingRecipes
 })
 
-// need to use nextTick to properly render initial data
-await nextTick(() => {
-  recipeStore.getSources()
-  recipeStore.getRecipes()
-})
 
 </script>
 

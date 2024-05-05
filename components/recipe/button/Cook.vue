@@ -14,6 +14,7 @@ const modalStore = useModalStore();
 const recipeStore = useRecipeStore();
 
 const cook = (event) => {
+  console.log("COOK")
   event.stopPropagation();
   modalStore.open('recipeInstructions')
   recipeStore.selectRecipe(props.recipe)
